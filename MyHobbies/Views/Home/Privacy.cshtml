@@ -1,6 +1,63 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Service Charges";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Tutoring Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input, button {
+            width: 40%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Puzzle Tutoring Calculator 🧩</h2>
+    <label>Hours Needed:</label> <br/>
+    <input type="number" id="hours" placeholder="Enter hours">
+    <p class="error" id="error-msg"></p>
+    <label>Hourly Rate:</label><br/>
+    <input type="text" id="rate" value="$25" readonly>
+    <br/> <br/>
+    <button id="calculate">Calculate Total</button>
+    <br/>
+    <label>Total Cost:</label> <br/>
+    <input type="text" id="total" readonly>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#calculate").click(function () {
+            let hours = parseFloat($("#hours").val());
+            let rate = 25;
+
+            if (isNaN(hours) || hours <= 0) {
+                $("#error-msg").text("Please enter a valid positive number.");
+                $("#total").val("");
+            } else {
+                $("#error-msg").text("");
+                let total = hours * rate;
+                $("#total").val(`$${total.toFixed(2)}`);
+            }
+        });
+    });
+</script>
+</body>
+</html>
